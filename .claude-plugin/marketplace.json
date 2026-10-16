@@ -1,0 +1,16 @@
+{
+  "name": "ux-research-skills",
+  "owner": {
+    "name": "José Pino",
+    "url": "https://www.linkedin.com/in/joselopino/"
+  },
+  "plugins": [
+    {
+      "name": "ux-research-skills",
+      "source": "./",
+      "description": "18 skills for UX research: onboarding interview, planning, methods, interviews, surveys, recruiting, card sorting, usability testing, heuristic evaluation, synthesis, insight QA, personas, branded PDF/HTML reports in any language, impact, ethics and ResearchOps.",
+      "version": "2.2.0"
+    }
+  ],
+  "description": "UX research skills for Claude: plan, run, analyze and report user research in English and Spanish, with branded PDF reports."
+}

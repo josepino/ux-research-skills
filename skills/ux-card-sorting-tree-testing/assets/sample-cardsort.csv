@@ -1,0 +1,16 @@
+participant,group,card
+P1,Account,Change password
+P1,Account,Update payment method
+P1,Orders,Order history
+P1,Orders,Track a delivery
+P1,Help,Contact support
+P2,My account,Change password
+P2,My account,Update payment method
+P2,My account,Order history
+P2,Shipping,Track a delivery
+P2,Help,Contact support
+P3,Account,Change password
+P3,Account,Update payment method
+P3,Orders,Order history
+P3,Orders,Track a delivery
+P3,Support,Contact support

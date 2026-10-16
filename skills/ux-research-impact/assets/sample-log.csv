@@ -1,0 +1,7 @@
+date,finding,recommendation,decision,owner,status,metric,result
+2026-03-10,INVENTED EXAMPLE: 6 of 8 participants did not find the shipping cost before paying,Show the shipping cost in the cart,Added in Q2,Product (Paula),implemented,Checkout abandonment,Abandonment fell from 68% to 61% (example; no control group)
+2026-03-10,INVENTED EXAMPLE: the sign-up form asks for data nobody understands,Reduce the form to 4 fields,Rejected: legal requires 2 more fields,Legal (Marta),rejected,Completed sign-ups,
+2026-04-02,INVENTED EXAMPLE: support gets many queries about changing plans,Redesign the plan-change screen,Goes into the Q4 backlog,Product (Paula),backlog,Support tickets per plan change,
+2026-05-15,INVENTED EXAMPLE: new users drop out of onboarding at step 3,Remove step 3 and move it to after first use,Accepted for sprint 14,Design (Lucas),accepted,7-day activation,
+2026-06-01,INVENTED EXAMPLE: search does not tolerate typos,Add typo tolerance to search,,,pending,,
+2026-06-20,INVENTED EXAMPLE: the account-recovery email lands in spam,Review the email configuration,Pending IT,IT (Raul),pending,Account recovery rate,

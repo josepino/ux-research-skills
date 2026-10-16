@@ -1,0 +1,9 @@
+nota,participante,tags,grupo,tipo,severidad,esfuerzo
+"No supe cuanto costaba el envio hasta el ultimo paso",P1,costo-oculto;pago,Pago,actitud,3,1
+"Abandono el carrito al ver el total final",P2,costo-oculto;abandono,Pago,conducta,3,1
+"No confio en guardar la tarjeta",P3,confianza;pago,Pago,actitud,2,2
+"Busco el filtro de talle y no lo encuentra",P2,navegacion;filtros,Navegacion,conducta,2,2
+"Tarda en encontrar donde cambiar su plan",P4,navegacion,Navegacion,conducta,2,3
+"Me encanta la variedad de productos",P1,oferta-positivo,Oferta,actitud,1,1
+"Pago con tarjeta de otra persona porque no ve opcion de transferencia",P4,pago;medios-de-pago,Pago,conducta,2,2
+"Dijo que el envio le parecio caro, pero igual compro",P5,costo-oculto,Pago,actitud,1,1

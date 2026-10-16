@@ -1,0 +1,3 @@
+donde,problema,heuristica,severidad,recomendacion
+Checkout paso 3,"El error solo se ve en rojo arriba del formulario",9,4,"Mostrar el mensaje junto al campo"
+Ajustes,"Ícono sin etiqueta de texto",6,2,"Agregar etiqueta visible"

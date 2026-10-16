@@ -1,0 +1,12 @@
+note,participant,tags,method,severity,effort
+"I did not understand whether shipping was included until the last step",P1,shipping-cost;trust,interview,3,1
+"I found out the cost at the end and closed the tab",P2,shipping-cost,interview,3,1
+"I hesitated to enter my card because I could not see the total",P3,trust;shipping-cost,interview,2,1
+"I could not find the size filter",P4,filters,interview,2,2
+"Asked for the pay button to be higher up",P5,pay-button,interview,1,1
+"Abandoned at step 3 after seeing the surcharge",U1,shipping-cost,usability,3,1
+"Did not see the size filter in the listing",U2,filters,usability,2,2
+"Said the return policy was already clear to them",U3,returns,usability,1,1
+"The final total surprised me",S1,shipping-cost,survey,3,1
+"I would prefer more visible filters",S2,filters,survey,2,2
+"38% abandonment on the payment screen (analytics data)",A1,shipping-cost,analytics,3,1

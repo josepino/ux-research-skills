@@ -1,0 +1,25 @@
+{
+  "name": "ux-research-skills",
+  "version": "2.2.0",
+  "description": "18 skills for UX research: plan, run, analyze and report user research with Claude. Works in English and Spanish (and answers in the language you write in).",
+  "author": {
+    "name": "José Pino",
+    "url": "https://www.linkedin.com/in/joselopino/"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ux-research",
+    "user-research",
+    "usability",
+    "interviews",
+    "surveys",
+    "synthesis",
+    "research-ops",
+    "claude-skills",
+    "agent-skills",
+    "spanish",
+    "english"
+  ],
+  "homepage": "https://github.com/josepino/ux-research-skills",
+  "repository": "https://github.com/josepino/ux-research-skills"
+}

@@ -1,0 +1,4 @@
+where,problem,heuristic,severity,recommendation
+Checkout step 2,"No progress indicator; users cannot tell how many steps remain",1,3,"Add a 'Step 2 of 4' indicator"
+Checkout step 3,"Error shown only in red at the top of the form",9,4,"Show the message next to the field with text and an icon"
+Home,"Banner text overlaps the photo and is hard to read",8,2,"Use a solid or semi-transparent background behind the text"

@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UX Research Skills · Cheatsheet</title>
+<style>
+/* Concept: the course as a reference sheet. White page, big black text, headings in a
+   blue > violet > magenta gradient, code on a dark panel. System fonts only: no external requests. */
+:root{
+  --bg:#ffffff; --fg:#0c0b14; --muted:#5a586b; --line:#e7e4f2; --surface:#f6f4fd;
+  --g1:#3b82f6; --g2:#8b2cf5; --g3:#e11df0; --accent:#8b2cf5; --accent-ink:#ffffff;
+  --code-bg:#151222; --code-fg:#ebe7ff;
+  --display:"Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0d0b15; --fg:#f3f1fa; --muted:#aaa6c0; --line:#2b2744; --surface:#171429;
+  --g1:#62a5fb; --g2:#b072f8; --g3:#f06af5; --accent:#b072f8; --accent-ink:#0d0b15;
+  --code-bg:#1d1933; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d0b15; --fg:#f3f1fa; --muted:#aaa6c0; --line:#2b2744; --surface:#171429;
+  --g1:#62a5fb; --g2:#b072f8; --g3:#f06af5; --accent:#b072f8; --accent-ink:#0d0b15;
+  --code-bg:#1d1933; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.55;
+  padding-inline:max(16px,4vw);padding-block:0 64px}
+.wrap{max-width:1080px;margin-inline:auto}
+a{color:var(--accent)}
+.grad{background:linear-gradient(90deg,var(--g1),var(--g2),var(--g3));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.1;margin:0}
+h1{font-size:clamp(2.2rem,6vw,4rem);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(1.6rem,3.6vw,2.4rem);font-weight:800;letter-spacing:-.015em}
+h3{font-size:1.15rem;font-weight:700}
+p{margin:0}
+code{font-family:var(--mono);font-size:.88em}
+.hero{padding-block:48px 24px;text-align:center}
+.hero .sub{font-family:var(--display);font-weight:600;font-size:clamp(1.1rem,2.4vw,1.5rem);margin-top:14px}
+.hero .meta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.pill{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 14px;font-size:.88rem;font-weight:500}
+nav.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);
+  margin-inline:calc(-1*max(16px,4vw));padding-inline:max(16px,4vw)}
+nav.top .row{max-width:1080px;margin-inline:auto;display:flex;gap:6px;overflow-x:auto;padding-block:10px;align-items:center}
+nav.top a{white-space:nowrap;text-decoration:none;color:var(--fg);font-weight:600;font-size:.92rem;padding:6px 12px;border-radius:8px}
+nav.top a:hover{background:var(--surface)}
+nav.top .sp{flex:1}
+.lang{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;font:700 .85rem var(--body);padding:6px 14px;cursor:pointer}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+section{padding-block:56px 8px;scroll-margin-top:60px}
+.lead{margin-top:12px;color:var(--muted);max-width:68ch;font-size:1.05rem}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:26px}
+.step{border-top:3px solid var(--accent);padding-top:12px}
+.step b{display:block;font-family:var(--display);font-size:1.1rem;margin-bottom:4px}
+.step p{color:var(--muted);font-size:.97rem}
+pre{margin:0;background:var(--code-bg);color:var(--code-fg);border-radius:10px;padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:.82rem;line-height:1.55;white-space:pre}
+.cmd{display:flex;gap:10px;align-items:flex-start;margin-top:14px}
+.cmd pre{flex:1;min-width:0}
+.copy{flex:none;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:8px;font:600 .8rem var(--body);padding:7px 12px;cursor:pointer}
+.copy:hover{border-color:var(--accent)}
+.copy.done{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-top:28px}
+.stage{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--surface)}
+.stage h3{font-size:1rem;margin-bottom:8px}
+.stage .k{font:700 .72rem var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.stage ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+.stage li a{font-family:var(--mono);font-size:.74rem;color:var(--fg);text-decoration:none;border-bottom:2px solid var(--accent);word-break:break-word}
+.cross{margin-top:12px;border:1px dashed var(--line);border-radius:12px;padding:12px 14px;font-size:.95rem;color:var(--muted)}
+.cross a{font-family:var(--mono);font-size:.8rem;color:var(--fg);margin-right:8px}
+@media (max-width:980px){.flow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.flow{grid-template-columns:1fr 1fr}}
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:24px}
+.tools input{flex:1;min-width:200px;font:500 1rem var(--body);padding:10px 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
+.chip{border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:999px;font:600 .85rem var(--body);padding:7px 14px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,470px),1fr));gap:20px;margin-top:22px}
+.skill{border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.skill header{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.skill .name{font-family:var(--mono);font-weight:600;font-size:1rem;overflow-wrap:anywhere}
+.tag{font:700 .7rem var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.skill dl{margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.skill dt{font:700 .72rem var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.skill dd{margin:0;font-size:.97rem}
+.say{background:var(--surface);border-radius:10px;padding:10px 12px;display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
+.say q{quotes:"“" "”";font-size:.95rem;flex:1;min-width:0}
+details{border-top:1px solid var(--line);padding-top:10px}
+summary{cursor:pointer;font-weight:700;font-size:.92rem}
+details pre{margin-top:10px}
+.empty{padding:30px;text-align:center;color:var(--muted)}
+.tw{overflow-x:auto;margin-top:22px;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:.93rem;min-width:620px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:700 .72rem var(--body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--surface)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+td code{overflow-wrap:anywhere}
+.scripts{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;margin-top:22px}
+.script{border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:grid;grid-template-columns:minmax(0,1fr);gap:10px;min-width:0}
+.script h3 code{font-weight:600}
+.script p{color:var(--muted);font-size:.95rem}
+.recipes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px;margin-top:22px}
+.recipe{border:1px solid var(--line);border-radius:14px;padding:20px}
+.recipe ol{margin:10px 0 0;padding-left:1.2em;display:grid;gap:6px;font-size:.97rem}
+.recipe ol code{background:var(--surface);padding:1px 6px;border-radius:5px}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px;margin-top:22px}
+.rule{border-left:3px solid var(--accent);padding:2px 0 2px 16px}
+.rule b{display:block;font-family:var(--display);margin-bottom:2px}
+.rule p{color:var(--muted);font-size:.95rem}
+footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;display:grid;gap:6px}
+.note{font-size:.88rem;color:var(--muted);margin-top:10px}
+@media print{nav.top,.copy,.tools{display:none}details:not([open])>*:not(summary){display:block}.skill{break-inside:avoid}}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <h1 class="grad">UX Research Skills</h1>
+  <p class="sub" data-i="sub"></p>
+  <div class="meta"><span class="pill" data-i="pill1"></span><span class="pill" data-i="pill2"></span><span class="pill" data-i="pill3"></span></div>
+</header>
+<nav class="top" aria-label="Sections"><div class="row" id="nav"></div></nav>
+
+<section id="start">
+  <h2 class="grad" data-i="h_start"></h2>
+  <p class="lead" data-i="lead_start"></p>
+  <div class="steps" id="steps"></div>
+  <div class="cmd"><pre>/plugin marketplace add josepino/ux-research-skills
+/plugin install ux-research-skills@ux-research-skills</pre><button class="copy" type="button" data-i="copy"></button></div>
+  <p class="note" data-i="note_install"></p>
+  <div class="cmd"><pre data-i="first_prompt"></pre><button class="copy" type="button" data-i="copy"></button></div>
+  <p class="note" data-i="note_first"></p>
+</section>
+
+<section id="map">
+  <h2 class="grad" data-i="h_map"></h2>
+  <p class="lead" data-i="lead_map"></p>
+  <div class="flow" id="flow"></div>
+  <div class="cross" id="cross"></div>
+</section>
+
+<section id="skills">
+  <h2 class="grad" data-i="h_skills"></h2>
+  <p class="lead" data-i="lead_skills"></p>
+  <div class="tools"><input id="q" type="search" data-iph="search" aria-label="Search"><span id="chips" role="group"></span></div>
+  <div id="grid" class="grid"></div>
+</section>
+
+<section id="scripts">
+  <h2 class="grad" data-i="h_scripts"></h2>
+  <p class="lead" data-i="lead_scripts"></p>
+  <div id="scripts-list" class="scripts"></div>
+</section>
+
+<section id="reports">
+  <h2 class="grad" data-i="h_reports"></h2>
+  <p class="lead" data-i="lead_reports"></p>
+  <div class="cmd"><pre>python3 skills/ux-research-report/scripts/render_report.py \
+  --input report.md --output report.html --lang es --theme auto</pre><button class="copy" type="button" data-i="copy"></button></div>
+  <div class="tw"><table id="rep-table"></table></div>
+</section>
+
+<section id="recipes">
+  <h2 class="grad" data-i="h_recipes"></h2>
+  <div class="recipes" id="recipes-list"></div>
+</section>
+
+<section id="numbers">
+  <h2 class="grad" data-i="h_numbers"></h2>
+  <p class="lead" data-i="lead_numbers"></p>
+  <div class="tw"><table id="num-table"></table></div>
+</section>
+
+<section id="rules">
+  <h2 class="grad" data-i="h_rules"></h2>
+  <div class="rules" id="rules-list"></div>
+</section>
+
+<section id="trouble">
+  <h2 class="grad" data-i="h_trouble"></h2>
+  <div class="tw"><table id="trouble-table"></table></div>
+  <footer>
+    <span data-i="foot1"></span>
+    <span data-i="foot2"></span>
+    <span>© José Pino · MIT · <a href="https://www.linkedin.com/in/joselopino/" rel="noopener">linkedin.com/in/joselopino</a></span>
+  </footer>
+</section>
+</div>
+
+<script>
+var UI={
+ sub:{en:"Cheatsheet for the 18 skills · plan, run, analyze and report user research",es:"Cheatsheet de los 18 skills · planificá, ejecutá, analizá y reportá investigación de usuarios"},
+ pill1:{en:"18 skills",es:"18 skills"},pill2:{en:"Python scripts, no installs",es:"Scripts Python, sin instalar nada"},pill3:{en:"English · Español",es:"English · Español"},
+ nav:[["start",{en:"Start",es:"Empezar"}],["map",{en:"Workflow",es:"Proceso"}],["skills",{en:"The 18 skills",es:"Los 18 skills"}],["scripts",{en:"Scripts",es:"Scripts"}],["reports",{en:"Reports",es:"Informes"}],["recipes",{en:"Recipes",es:"Recetas"}],["numbers",{en:"Numbers",es:"Cifras"}],["rules",{en:"Rules",es:"Reglas"}],["trouble",{en:"Troubleshooting",es:"Si algo falla"}]],
+ h_start:{en:"Start in 3 steps",es:"Empezar en 3 pasos"},
+ lead_start:{en:"There are no commands to memorize. Describe what you need in your own words and the right skill is picked. If you don't know where to begin, ask for the onboarding interview.",es:"No hay comandos que memorizar. Describí lo que necesitás con tus palabras y se elige el skill correcto. Si no sabés por dónde empezar, pedí la entrevista de onboarding."},
+ steps:[[{en:"1. Install",es:"1. Instalá"},{en:"Once, in Claude Code (or upload the zips in Claude.ai). Replace josepino with the repository owner.",es:"Una vez, en Claude Code (o subí los zips en Claude.ai). Reemplazá josepino por el dueño del repositorio."}],[{en:"2. Let it interview you",es:"2. Dejá que te entreviste"},{en:"It asks about your role, product, decision and constraints, and saves a small research-profile.md.",es:"Pregunta por tu rol, producto, decisión y restricciones, y guarda un research-profile.md corto."}],[{en:"3. Paste real data",es:"3. Pegá datos reales"},{en:"Notes, surveys, screenshots, CSV. Pseudonymize participants first (names, e-mails, companies).",es:"Notas, encuestas, capturas, CSV. Antes, seudonimizá a los participantes (nombres, emails, empresas)."}]],
+ copy:{en:"Copy",es:"Copiar"},copied:{en:"Copied",es:"Copiado"},select:{en:"Selected: Ctrl/Cmd+C",es:"Seleccionado: Ctrl/Cmd+C"},
+ note_install:{en:"Claude.ai: Settings → Capabilities → Skills, upload ux-research-onboarding.zip first. Skills answer in the language you write in.",es:"Claude.ai: Configuración → Capacidades → Skills, subí primero ux-research-onboarding.zip. Los skills responden en el idioma en que escribís."},
+ first_prompt:{en:"Interview me about my research project",es:"Entrevistame para entender mi proyecto de investigación"},
+ note_first:{en:"Recommended first request.",es:"Primer pedido recomendado."},
+ h_map:{en:"Workflow",es:"Proceso"},lead_map:{en:"Minimum path: onboarding → plan → method → prepare → run → analyze → report. Ethics review goes before fieldwork.",es:"Camino mínimo: onboarding → plan → método → preparar → campo → análisis → informe. La revisión ética va antes del campo."},
+ always:{en:"Always available:",es:"Siempre disponibles:"},
+ h_skills:{en:"The 18 skills",es:"Los 18 skills"},lead_skills:{en:"Each card says when to use it, how to ask (copy and adapt) and what you get. Example outputs are illustrative; the data is invented.",es:"Cada tarjeta dice cuándo usarlo, cómo pedirlo (copiá y adaptá) y qué te entrega. Las salidas de ejemplo son ilustrativas; los datos son inventados."},
+ search:{en:"Search: interview, SUS, bias, report…",es:"Buscá: entrevista, SUS, sesgos, informe…"},all:{en:"All",es:"Todas"},none:{en:"No skill matches. Try another word or choose All.",es:"Ningún skill coincide. Probá con otra palabra o elegí Todas."},
+ when:{en:"When to use it",es:"Cuándo usarlo"},ask:{en:"Ask it like this",es:"Pedilo así"},gives:{en:"What you get",es:"Qué te entrega"},example:{en:"Example output (illustrative)",es:"Salida de ejemplo (ilustrativa)"},
+ h_scripts:{en:"Helper scripts",es:"Scripts de apoyo"},lead_scripts:{en:"Python 3, standard library only, no network. The skills run them when you give them a CSV, and you can run them yourself. Outputs below are real, generated from the sample data bundled in each skill.",es:"Python 3, solo biblioteca estándar, sin red. Los skills los usan cuando les das un CSV, y también podés correrlos vos. Las salidas de abajo son reales, generadas con los datos de ejemplo de cada skill."},
+ realout:{en:"Real output (sample data)",es:"Salida real (datos de ejemplo)"},
+ h_reports:{en:"Branded PDF reports in your language",es:"Informes PDF con marca, en tu idioma"},lead_reports:{en:"Ask for a report and say who it is for. The skill writes it in your language and renders a self-contained HTML page: contents sidebar, callouts, quote cards, dark mode, print styles.",es:"Pedí un informe e indicá para quién es. El skill lo escribe en tu idioma y genera una página HTML autocontenida: índice lateral, destacados, tarjetas de citas, modo oscuro, estilos de impresión."},
+ rep_head:[{en:"Option",es:"Opción"},{en:"What it does",es:"Qué hace"}],
+ rep_rows:[[{en:"--researcher \"Name\" --version 1.0",es:"--researcher \"Nombre\" --version 1.0"},{en:"UX Researcher, version and generation time (date, time, time zone) on the cover and in the print footer",es:"UX Researcher, versión y momento de generación (fecha, hora, zona horaria) en la portada y el pie de impresión"}],[{en:"-o report.pdf",es:"-o informe.pdf"},{en:"Branded PDF (Chrome, Chromium or Edge); .html for the web page",es:"PDF con marca (Chrome, Chromium o Edge); .html para la página web"}],[{en:"![what is seen](shot.png \"why it matters\")",es:"![qué se ve](captura.png \"por qué importa\")"},{en:"Numbered figure with the description of each screenshot",es:"Figura numerada con la descripción de cada captura"}],[{en:"```chart / ```diagram",es:"```chart / ```diagram"},{en:"Bar, line and donut charts; flow, 2x2 and journey diagrams (--guide shows the syntax)",es:"Gráficos de barras, líneas y anillo; diagramas de flujo, 2x2 y recorrido (--guide muestra la sintaxis)"}],[{en:"--lang es|en|…",es:"--lang es|en|…"},{en:"Sets the page language and built-in labels (English and Spanish included)",es:"Define el idioma de la página y las etiquetas (inglés y español incluidos)"}],[{en:"--labels labels.json",es:"--labels labels.json"},{en:"Any other language: the skill translates the labels and passes them here",es:"Cualquier otro idioma: el skill traduce las etiquetas y las pasa acá"}],[{en:"--theme auto|light|dark",es:"--theme auto|light|dark"},{en:"Follows the reader's system theme by default",es:"Por defecto sigue el tema del sistema de quien lee"}],[{en:"> [!insight] / [!recommendation] / [!risk]",es:"> [!insight] / [!recommendation] / [!risk]"},{en:"Markdown callouts rendered as colored cards",es:"Destacados en Markdown que se muestran como tarjetas de color"}]],
+ h_recipes:{en:"Recipes",es:"Recetas"},
+ h_numbers:{en:"Reference numbers",es:"Cifras de referencia"},lead_numbers:{en:"Rules of thumb, not laws. Sources sometimes disagree and each skill's references/sources.md shows the difference.",es:"Referencias, no leyes. Las fuentes a veces difieren y el references/sources.md de cada skill muestra la diferencia."},
+ num_head:[{en:"What",es:"Qué"},{en:"Reference",es:"Referencia"},{en:"Watch out",es:"Ojo con"}],
+ h_rules:{en:"Golden rules",es:"Reglas de oro"},
+ h_trouble:{en:"If something goes wrong",es:"Si algo falla"},tr_head:[{en:"Symptom",es:"Síntoma"},{en:"What to try",es:"Qué probar"}],
+ foot1:{en:"Skills based on published UX research methods; every skill cites its sources. They assist, they do not replace the researcher's judgment: verify results, quotes and figures.",es:"Skills basados en métodos publicados de UX Research; cada skill cita sus fuentes. Asisten, no reemplazan el criterio de quien investiga: verificá resultados, citas y cifras."},
+ foot2:{en:"Learn the method in the Udemy course “UX Research desde Cero” (taught in Spanish).",es:"Aprendé el método en el curso de Udemy «UX Research desde Cero»."}
+};
+var STAGES=[
+ {id:"define",label:{en:"Define",es:"Definir"},skills:["ux-research-onboarding","ux-research-plan","ux-method-selector"]},
+ {id:"prepare",label:{en:"Prepare",es:"Preparar"},skills:["ux-interview-guide","ux-survey-builder","ux-participants-recruiting","ux-card-sorting-tree-testing"]},
+ {id:"run",label:{en:"Run & evaluate",es:"Campo y evaluación"},skills:["ux-usability-testing","ux-heuristic-evaluation","ux-transcript-prep"]},
+ {id:"analyze",label:{en:"Analyze",es:"Analizar"},skills:["ux-synthesis","ux-insight-qa"]},
+ {id:"communicate",label:{en:"Communicate",es:"Comunicar"},skills:["ux-personas-and-maps","ux-research-report"]},
+ {id:"impact",label:{en:"Impact",es:"Impacto"},skills:["ux-research-impact"]},
+ {id:"always",label:{en:"Always",es:"Siempre"},skills:[]}
+];
+var CROSS=["ux-ethics-bias-review","ux-research-ops","ux-research-coach"];
+var SKILLS=[
+{n:"ux-research-onboarding",st:"define",
+ when:{en:"The first time you work with these skills, or when your context changes: it interviews you and writes research-profile.md.",es:"La primera vez que usás los skills, o cuando cambia tu contexto: te entrevista y escribe research-profile.md."},
+ say:{en:"Interview me about my research project",es:"Entrevistame para entender mi proyecto de investigación"},
+ gives:{en:"A short profile (role, product, decisions, constraints, stakeholders, language, report audience) that every other skill reads first.",es:"Un perfil corto (rol, producto, decisiones, restricciones, stakeholders, idioma, audiencia del informe) que todos los demás skills leen primero."},
+ out:{en:"Round 2 of 5\nQ1. What decision should this research inform?\nQ2. Do you already have funnel analytics?\n...\nPlayback: Food-delivery app · first-time buyers drop at payment\nlanguage: es · audience: product director\nSaved: research-profile.md (42 lines, no personal data)",es:"Ronda 2 de 5\nP1. ¿Qué decisión debería informar esta investigación?\nP2. ¿Ya tenés analítica del embudo?\n...\nResumen: app de delivery · compradores nuevos abandonan en el pago\nlanguage: es · audience: dirección de producto\nGuardado: research-profile.md (42 líneas, sin datos personales)"}},
+{n:"ux-research-coach",st:"always",
+ when:{en:"You are learning, don't know which skill to use, want a concept explained, a quiz, tool advice or guidance on using AI in research.",es:"Estás aprendiendo, no sabés qué skill usar, querés un concepto explicado, un quiz, consejo de herramientas o cómo usar IA en investigación."},
+ say:{en:"I need to improve our checkout and I don't know where to start",es:"Tengo que mejorar el checkout de mi tienda y no sé por dónde empezar"},
+ gives:{en:"Detected stage, the recommended chain of skills and a single next step. It also explains concepts (what, when, example, common mistake) and runs 39-question quizzes.",es:"Etapa detectada, la cadena de skills recomendada y un único próximo paso. También explica conceptos (qué es, cuándo, ejemplo, error común) y hace quizzes con 39 preguntas."},
+ out:{en:"Stage: Define (existing product)\nDecision to inform: reduce abandonment at payment\nChain: plan → method → prepare → field → synthesis → report\nNext step: use ux-research-plan with product, decision, time, budget",es:"Etapa: Definir (producto existente)\nDecisión a informar: reducir el abandono en el pago\nCadena: plan → método → preparar → campo → síntesis → informe\nSiguiente paso: usá ux-research-plan con producto, decisión, tiempo y presupuesto"}},
+{n:"ux-research-plan",st:"define",
+ when:{en:"You have a product question and need a study with objectives, questions, hypotheses and a timeline, or you must justify research to a boss.",es:"Tenés una duda de producto y necesitás un estudio con objetivos, preguntas, hipótesis y cronograma, o tenés que justificar la investigación ante un jefe."},
+ say:{en:"Write a research plan to understand why people abandon at payment. I have 3 weeks and a small budget",es:"Armame un plan de investigación para entender por qué abandonan en el pago. Tengo 3 semanas y poco presupuesto"},
+ gives:{en:"A 1–2 page plan: context, decision to inform, objectives, research questions, assumption map, method, participants, deliverables, timeline, risks, next 3 steps.",es:"Un plan de 1–2 páginas: contexto, decisión a informar, objetivos, preguntas, mapa de supuestos, método, participantes, entregables, cronograma, riesgos y próximos 3 pasos."},
+ out:{en:"Objective: learn what stops mobile buyers at payment, to decide\n  whether to redesign checkout.\nQ1 where do they hesitate and why?  → interviews + funnel data\nQ2 what information is missing?      → usability test\nWeek 1 prep · 2 field (6 sessions) · 3 synthesis and readout\nAssumption: shipping cost appears too late.",es:"Objetivo: entender qué frena a quienes compran desde el móvil en el pago,\n  para decidir si se rediseña el checkout.\nP1 ¿dónde dudan y por qué?        → entrevistas + embudo\nP2 ¿qué información falta?         → prueba de usabilidad\nSemana 1 prep · 2 campo (6 sesiones) · 3 síntesis y readout\nSupuesto: el costo de envío aparece tarde."}},
+{n:"ux-method-selector",st:"define",
+ when:{en:"You doubt between interviews, surveys, usability tests, A/B, card sorting, diary studies, ethnography or another method.",es:"Dudás entre entrevistas, encuestas, pruebas de usabilidad, A/B, card sorting, diarios, etnografía u otro método."},
+ say:{en:"Interviews or a survey to understand why people don't complete signup?",es:"¿Entrevista o encuesta para entender por qué no completan el registro?"},
+ gives:{en:"A justified recommendation using four axes (why vs how many, say vs do, stage, context), what each method cannot answer, sample reference and effort.",es:"Una recomendación justificada con cuatro ejes (por qué vs cuántos, dicen vs hacen, etapa, contexto), lo que cada método NO responde, muestra de referencia y esfuerzo."},
+ out:{en:"Axes: qualitative · behavioral+attitudinal · existing product\nMain: interviews (5–8) → explains why\nComplement: funnel analytics → where they drop\nRuled out: survey alone, it won't explain motives\nNext: ux-interview-guide",es:"Ejes: cualitativo · conductual+actitudinal · producto existente\nPrincipal: entrevistas (5–8) → explica el porqué\nComplemento: analítica del embudo → dónde abandonan\nDescartado: encuesta sola, no explica motivos\nSiguiente: ux-interview-guide"}},
+{n:"ux-interview-guide",st:"prepare",
+ when:{en:"You need interview questions or a guide, or want your questions reviewed (leading, closed, hypothetical, double-barreled).",es:"Necesitás preguntas o una guía de entrevista, o que revisen las tuyas (capciosas, cerradas, hipotéticas, dobles)."},
+ say:{en:"Build a 45-minute interview guide about how people manage their personal finances",es:"Guía de 45 min para entender cómo organizan sus finanzas personales"},
+ gives:{en:"A guide by blocks with timing and probes, a bad → better question table, logistics checklist, and session-conduct tips. Includes a JTBD timeline guide and a bilingual question linter.",es:"Guía por bloques con tiempos y sondeos, tabla «pregunta mala → mejor», checklist de logística y consejos de conducción. Incluye guía JTBD y un linter de preguntas bilingüe."},
+ out:{en:"1 Intro (5 min) · 2 Warm-up (5) · 3 Context (10)\n4 How they do it today (15) · 5 Reaction (5) · 6 Close (5)\n\nDo you like managing your money?  → closed\nWhat is hardest about keeping track of expenses, and why?\n\nTell me about the last time you reviewed your spending.\n  Probe: what did you do next? why?",es:"1 Intro (5 min) · 2 Rompehielo (5) · 3 Contexto (10)\n4 Cómo lo hace hoy (15) · 5 Reacción (5) · 6 Cierre (5)\n\n¿Te gusta organizar tus finanzas?  → cerrada\n¿Qué es lo más difícil de llevar tus gastos y por qué?\n\nContame la última vez que revisaste tus gastos.\n  Sondeo: ¿qué hiciste después? ¿por qué?"}},
+{n:"ux-survey-builder",st:"prepare",
+ when:{en:"You will write, review or analyze a survey, or need to score the SUS (or NPS, UMUX-Lite, SEQ).",es:"Vas a hacer, revisar o analizar una encuesta, o tenés que calcular el SUS (o NPS, UMUX-Lite, SEQ)."},
+ say:{en:"Review this satisfaction survey and tell me which questions are leading",es:"Revisá esta encuesta de satisfacción y decime qué preguntas son capciosas"},
+ gives:{en:"A ready-to-paste survey, or a table question → problem → rewrite. SUS scoring with grade, acceptability and consistency checks.",es:"Una encuesta lista para pegar, o una tabla pregunta → problema → reescritura. Puntaje SUS con grado, aceptabilidad y chequeos de consistencia."},
+ out:{en:"Question                                  Problem        Rewrite\nHow difficult was it to pay?              loaded word    How easy or difficult was it to pay?\nWhat do you think of design and speed?    double         two separate questions\nScale 1 “a little” to 5 “a lot”           unbalanced     bipolar 1–5 scale",es:"Pregunta                                   Problema        Reescritura\n¿Qué tan difícil fue pagar?               palabra cargada ¿Qué tan fácil o difícil fue pagar?\n¿Qué opinás del diseño y la velocidad?    doble           dos preguntas separadas\nEscala 1 «poco» a 5 «mucho»               desbalanceada   escala bipolar 1–5"}},
+{n:"ux-participants-recruiting",st:"prepare",
+ when:{en:"You must decide who to recruit, how many, how to screen them, what incentive and consent to use, or run accessible research.",es:"Tenés que decidir a quién reclutar, cuántos, cómo filtrarlos, qué incentivo y consentimiento usar, o hacer investigación accesible."},
+ say:{en:"Write a screener and a consent form for 6 interviews with food-delivery app users",es:"Necesito un screener y consentimiento para 6 entrevistas con usuarios de apps de delivery"},
+ gives:{en:"Target profile, sample with a no-show buffer, screener with distractor options and scoring, 8 participant e-mails and a modular consent form (English and Spanish copies).",es:"Perfil objetivo, muestra con margen por ausencias, screener con distractores y puntaje, 8 correos para participantes y consentimiento modular (copias en inglés y español)."},
+ out:{en:"Must have: ordered delivery 2+ times a month in the last 3 months\nExclude: works in delivery, UX or agencies\nSample: 6 effective + 25 % = 8 to recruit\nScreener: 8 questions, distractor options\nConsent: separate boxes for audio and video",es:"Imprescindible: pidió delivery 2+ veces al mes en 3 meses\nExcluir: trabaja en delivery, en UX o en agencias\nCantidad: 6 efectivas + 25 % = 8 a reclutar\nScreener: 8 preguntas, opciones distractoras\nConsentimiento: casillas separadas para audio y video"}},
+{n:"ux-card-sorting-tree-testing",st:"prepare",
+ when:{en:"You want to organize a menu or information architecture, or validate whether people can find things in a structure.",es:"Querés organizar un menú o una arquitectura de información, o validar si encuentran cosas en una estructura."},
+ say:{en:"I want to reorganize my recipe site's menu. Design the card sort and I'll analyze the results",es:"Quiero reorganizar el menú de mi sitio de recetas. Diseñá el card sorting y después analizo los resultados"},
+ gives:{en:"Recommended variant, cards, instructions, tree-test tasks and analysis with scripts (similarity matrix, success per task).",es:"Variante recomendada, tarjetas, instrucciones, tareas de tree test y análisis con scripts (matriz de similitud, éxito por tarea)."},
+ out:{en:"Variant: open card sort (mental models)\nCards: 30–50, one topic each, no synonyms\nParticipants: 15+ per user group\nThen: tree test with 8 tasks to validate the tree\nAnalysis: cardsort_matrix.py results.csv --agreement",es:"Variante: card sorting abierto (modelos mentales)\nTarjetas: 30–50, un tema por tarjeta, sin sinónimos\nParticipantes: 15+ por grupo\nDespués: tree test con 8 tareas para validar el árbol\nAnálisis: cardsort_matrix.py resultados.csv --agreement"}},
+{n:"ux-usability-testing",st:"run",
+ when:{en:"You want to test a prototype or product with users: tasks, moderator script, metrics and findings.",es:"Querés probar un prototipo o producto con usuarios: tareas, guion de moderación, métricas y hallazgos."},
+ say:{en:"Plan a usability test for my prototype with 5 users: tasks, moderator script and metrics",es:"Planificá una prueba de usabilidad de mi prototipo con 5 usuarios: tareas, guion de moderación y métricas"},
+ gives:{en:"Test plan, tasks written without clues, think-aloud script, observation sheet, metrics (success, time, SEQ, UMUX-Lite, SUS), severity ratings and a short report.",es:"Plan de prueba, tareas sin pistas, guion con think-aloud, hoja de observación, métricas (éxito, tiempo, SEQ, UMUX-Lite, SUS), severidad y un informe breve."},
+ out:{en:"Task 3: “You want to change your delivery address for tomorrow's order.”\n  Success: address updated and confirmed · Stop after 3 min\nTask lint: task 2 names a button (“Click Settings”) → rewrite\nMetrics: success rate, time on task, SEQ after each task",es:"Tarea 3: «Querés cambiar la dirección de entrega del pedido de mañana».\n  Éxito: dirección actualizada y confirmada · Cortar a los 3 min\nLint: la tarea 2 nombra un botón («Hacé clic en Configuración») → reescribir\nMétricas: tasa de éxito, tiempo en tarea, SEQ tras cada tarea"}},
+{n:"ux-heuristic-evaluation",st:"run",
+ when:{en:"You want to review a screen, flow or prototype against Nielsen's 10 heuristics before testing with users.",es:"Querés revisar una pantalla, flujo o prototipo contra las 10 heurísticas de Nielsen antes de probar con usuarios."},
+ say:{en:"Run a heuristic evaluation of the checkout flow (screenshots attached)",es:"Hacé una evaluación heurística del flujo de checkout (adjunto capturas)"},
+ gives:{en:"Findings table (where, evidence, heuristic, severity 0–4, recommendation), strengths, validation plan; consolidation of several evaluators with a script.",es:"Tabla de hallazgos (dónde, evidencia, heurística, severidad 0–4, recomendación), fortalezas, plan de validación; consolidación de varios evaluadores con un script."},
+ out:{en:"ID  Where     Problem                       Heur.  Sev  Recommendation\n1   Payment   No progress indicator         1      3    Add a step bar\n2   Payment   “Error 402” with no help      9      4    Plain message + how to fix\nStrengths: address autocomplete, visible order summary",es:"ID  Dónde      Problema                      Heur.  Sev  Recomendación\n1   Pago       Sin indicador de progreso     1      3    Barra de pasos\n2   Pago       «Error 402» sin explicación   9      4    Mensaje claro + cómo resolver\nFortalezas: autocompletar dirección, resumen visible"}},
+{n:"ux-transcript-prep",st:"run",
+ when:{en:"Before analyzing or pasting transcripts into any AI tool: clean them, pseudonymize participants, and review your own moderation.",es:"Antes de analizar o pegar transcripciones en una herramienta de IA: limpiarlas, seudonimizar a los participantes y revisar tu propia moderación."},
+ say:{en:"Clean these Zoom transcripts and remove participants' personal data before I analyze them",es:"Limpiá estas transcripciones de Zoom y sacá los datos personales de los participantes antes de analizarlas"},
+ gives:{en:"Analysis-ready transcripts (quotes untouched), pseudonyms P01…, a separate identity map with restricted permissions, and a moderator scorecard (talk share, interruptions, leading questions).",es:"Transcripciones listas para analizar (citas intactas), seudónimos P01…, mapa de identidad aparte con permisos restringidos y scorecard del moderador (tiempo de habla, interrupciones, preguntas capciosas)."},
+ out:{en:"Detected: 2 names, 1 e-mail, 1 phone → replaced (P01, [EMAIL], [PHONE])\nIdentity map written to identity-map.csv (permissions 0600)\nQuoted text verified identical: 14/14\nScorecard: moderator spoke 38 % of words; 2 closed questions flagged",es:"Detectado: 2 nombres, 1 email, 1 teléfono → reemplazados (P01, [EMAIL], [TELÉFONO])\nMapa de identidad en identity-map.csv (permisos 0600)\nTexto citado verificado idéntico: 14/14\nScorecard: el moderador habló el 38 % de las palabras; 2 preguntas cerradas marcadas"}},
+{n:"ux-synthesis",st:"analyze",
+ when:{en:"You have notes, transcripts or open-ended answers and want themes, findings, priorities and recommendations.",es:"Tenés notas, transcripciones o respuestas abiertas y querés temas, hallazgos, prioridades y recomendaciones."},
+ say:{en:"Synthesize these 6 interviews and prioritize the findings (notes labeled P01–P06)",es:"Sintetizá estas 6 entrevistas y priorizá los hallazgos (notas con ID P01–P06)"},
+ gives:{en:"Codebook, themes with “n of N” and quotes, affinity map, priority matrix, insights and “How might we…” questions. Triangulation across methods.",es:"Libro de códigos, temas con «n de N» y citas, mapa de afinidad, matriz de prioridad, insights y preguntas «¿cómo podríamos…?». Triangulación entre métodos."},
+ out:{en:"Theme            Participants  Quote (check)\nHidden cost       4/6          “I didn't know shipping until the last step” (P1)\nPayment methods   3/6          “I wanted to pay by bank transfer” (P4)\nTop priority: hidden cost (4/6, blocks purchase)\nHMW: how might we show the total before payment?",es:"Tema               Participantes  Cita (revisar)\nCosto oculto        4/6           «No sabía cuánto costaba el envío hasta el final» (P1)\nMedios de pago      3/6           «Quería pagar por transferencia» (P4)\nPrioridad alta: costo oculto (4/6, bloquea la compra)\nHMW: ¿cómo mostrar el costo total antes del pago?"}},
+{n:"ux-insight-qa",st:"analyze",
+ when:{en:"Before a finding, theme or report reaches stakeholders: is it an insight or just an observation? Do the quotes really exist?",es:"Antes de que un hallazgo, tema o informe llegue a stakeholders: ¿es un insight o solo una observación? ¿Las citas existen de verdad?"},
+ say:{en:"Check that every quote in my report really appears in the transcripts",es:"Verificá que las citas de mi informe estén de verdad en las transcripciones"},
+ gives:{en:"Traffic-light review of insights and themes, quote verification (verified / approximate / not found), small-sample warnings, tough sparring questions.",es:"Revisión con semáforo de insights y temas, verificación de citas (verificada / aproximada / no encontrada), avisos de muestra chica y preguntas duras de sparring."},
+ out:{en:"Quotes: 9 found · 1 approximate (0.95: one word added) · 1 NOT FOUND\nFinding 3 rests on 1 participant → downgrade to a lead\nTheme “Pricing” is a topic label. Ask: what did people do or fail to do?",es:"Citas: 9 verificadas · 1 aproximada (0,95: una palabra agregada) · 1 NO ENCONTRADA\nEl hallazgo 3 depende de 1 participante → bajarlo a pista\nEl tema «Precios» es un rótulo de tópico. Preguntá: ¿qué hicieron o no hicieron?"}},
+{n:"ux-personas-and-maps",st:"communicate",
+ when:{en:"You need a persona, empathy map, journey or experience map, or a mental-model analysis.",es:"Necesitás una persona, mapa de empatía, journey o mapa de experiencia, o un análisis de modelos mentales."},
+ say:{en:"Create a persona and a journey map from these interviews",es:"Armá una persona y un journey a partir de estas entrevistas"},
+ gives:{en:"Artifacts with status (validated or hypothesis), evidence base, quotes and gaps, plus a linter that checks they declare evidence and date.",es:"Artefactos con estado (validado o hipótesis), base de evidencia, citas y vacíos, más un linter que verifica que declaren evidencia y fecha."},
+ out:{en:"Marta, clinic administrator (based on n=6 · 2026-10-13)\nGoal: switch scheduling provider without losing appointments\nPain: “I'm not sure my data will survive the move” [Quote]\nJourney emotion: Research 3 · Try 4 · Migrate 2 · Use 3\nGaps: who signs off on the purchase?",es:"Marta, administradora de clínica (basada en n=6 · 2026-10-13)\nObjetivo: cambiar de proveedor sin perder turnos\nFrustración: «no sé si mis datos se van a perder» [Cita]\nEmoción del journey: Investigar 3 · Probar 4 · Migrar 2 · Usar 3\nVacíos: ¿quién decide la compra?"}},
+{n:"ux-research-report",st:"communicate",
+ when:{en:"You have findings and need a report, executive summary, presentation or readout message, in your language.",es:"Tenés hallazgos y necesitás un informe, resumen ejecutivo, presentación o mensaje de readout, en tu idioma."},
+ say:{en:"Write a one-page summary for the director, in Spanish, and render it as HTML",es:"Armá un resumen de una página para el director, en español, y generalo en HTML"},
+ gives:{en:"Full report, one-page summary, presentation script and readout message, then a self-contained HTML page (any language) with contents, callouts, quote cards and dark mode.",es:"Informe completo, resumen de una página, guion de presentación y mensaje de readout, y luego una página HTML autocontenida (cualquier idioma) con índice, destacados, citas y modo oscuro."},
+ out:{en:"Decision: redesign payment on mobile\nWhat we did: 6 interviews + funnel data (30 days)\nWhat we found: 4 of 6 don't see the total cost until the end\nWhat we recommend: show it in the cart (priority 1)\nWhat we need: a decision before Oct 30",es:"Decisión: rediseñar el pago en móvil\nQué hicimos: 6 entrevistas + embudo (30 días)\nQué encontramos: 4 de 6 no ven el costo total hasta el final\nQué recomendamos: mostrarlo en el carrito (prioridad 1)\nQué necesitamos: decisión antes del 30/10"}},
+{n:"ux-research-impact",st:"impact",
+ when:{en:"After the report: track which decisions your research changed and show its value to the business.",es:"Después del informe: seguí qué decisiones cambió tu investigación y mostrá su valor para el negocio."},
+ say:{en:"Build a log of the decisions our research influenced this quarter",es:"Armá un registro de las decisiones que influyó la investigación este trimestre"},
+ gives:{en:"Decision log with status and owner, metric mapping set before the study, business-case structure, attribution that avoids inflating results, and a summary script.",es:"Registro de decisiones con estado y responsable, mapa de métricas definido antes del estudio, estructura de caso de negocio, atribución que no infla resultados y un script de resumen."},
+ out:{en:"Recommendations: 8 · implemented 3 (38 %) · backlog 3 · rejected 2\nOldest pending: “Show total in cart” (74 days, owner: Product)\nWarnings: 2 without a metric, 1 implemented without a result",es:"Recomendaciones: 8 · implementadas 3 (38 %) · backlog 3 · rechazadas 2\nPendiente más antigua: «Mostrar total en el carrito» (74 días, responsable: Producto)\nAvisos: 2 sin métrica, 1 implementada sin resultado"}},
+{n:"ux-ethics-bias-review",st:"always",
+ when:{en:"Before fieldwork and when analyzing: consent, privacy, researcher and survey biases, AI use with participant data, synthetic-user limits.",es:"Antes del campo y al analizar: consentimiento, privacidad, sesgos del investigador y de encuestas, uso de IA con datos de participantes, límites de usuarios sintéticos."},
+ say:{en:"Review my plan and interview guide: is it ethical and where could bias creep in?",es:"Revisá mi plan y mi guía de entrevista: ¿es ético y dónde puede colarse el sesgo?"},
+ gives:{en:"Traffic-light verdict, ordered ethical risks, likely biases with mitigations and rewritten text, plus items that need a human (legal, data owner).",es:"Veredicto con semáforo, riesgos éticos ordenados, sesgos probables con mitigación y texto reescrito, más pendientes para una persona (legales, responsable de datos)."},
+ out:{en:"Verdict: YELLOW (fix before fieldwork)\nRisk: recording without separate consent → add a checkbox\nBias: 3 leading questions → rewritten below\nBias: only current customers interviewed (sampling)\nNeeds a human: confirm data retention with legal",es:"Veredicto: AMARILLO (corregir antes del campo)\nRiesgo: grabación sin consentimiento separado → agregar casilla\nSesgo: 3 preguntas capciosas → reescritas abajo\nSesgo: solo entrevistaste a clientes actuales (muestreo)\nRequiere una persona: confirmar retención de datos con legales"}},
+{n:"ux-research-ops",st:"always",
+ when:{en:"You want better notes, debriefs, a research repository, file naming, retros or guardrails for non-researchers doing research.",es:"Querés mejores notas, debriefs, un repositorio de investigación, nombres de archivo, retros o guardrails para quienes investigan sin ser researchers."},
+ say:{en:"Create the folder structure for the checkout study with 6 participants",es:"Creá la estructura de carpetas para el estudio de checkout con 6 participantes"},
+ gives:{en:"Note-taking guide, debrief agenda, repository structure and naming convention, study retro, request intake form; a script that creates the study folder.",es:"Guía de notas, agenda de debrief, estructura de repositorio y convención de nombres, retro del estudio, formulario de pedidos; un script que crea la carpeta del estudio."},
+ out:{en:"02-studies/2026-10-13_checkout-usability/\n├── README.md\n├── debriefs/…_debrief_template_v01.md\n├── notes/…_note_p01_v01.md … p06\n└── synthesis/checkout-usability_codebook_v01.md",es:"02-estudios/2026-10-13_checkout-usabilidad/\n├── README.md\n├── debriefs/…_debrief_plantilla_v01.md\n├── notas/…_nota_p01_v01.md … p06\n└── sintesis/checkout-usabilidad_libro-de-codigos_v01.md"}}
+];
+var SCRIPTS=[
+{n:"sus_score.py",sk:"ux-survey-builder",d:{en:"SUS per participant with grade and consistency flags. Also NPS.",es:"SUS por participante con grado y alertas de consistencia. También NPS."},cmd:"python3 scripts/sus_score.py responses.csv --lang es"},
+{n:"cardsort_matrix.py",sk:"ux-card-sorting-tree-testing",d:{en:"Similarity matrix between cards and suggested grouping. CSV: participant,group,card.",es:"Matriz de similitud entre tarjetas y agrupación sugerida. CSV: participante,grupo,tarjeta."},cmd:"python3 scripts/cardsort_matrix.py results.csv --agreement"},
+{n:"tree_test_summary.py",sk:"ux-card-sorting-tree-testing",d:{en:"Success, directness and 95% confidence interval per task.",es:"Éxito, directness e intervalo de confianza del 95 % por tarea."},cmd:"python3 scripts/tree_test_summary.py tree_results.csv"},
+{n:"sample_size.py",sk:"ux-participants-recruiting",d:{en:"How many participants to recruit for a method, with a no-show buffer.",es:"Cuántos participantes reclutar según el método, con margen por ausencias."},cmd:"python3 scripts/sample_size.py --method usability --segments 2"},
+{n:"lint_questions.py",sk:"ux-interview-guide · ux-ethics-bias-review",d:{en:"Flags leading, double-barreled, closed, hypothetical and jargon questions (English and Spanish). Heuristic: confirm each alert.",es:"Marca preguntas capciosas, dobles, cerradas, hipotéticas y con jerga (inglés y español). Heurístico: confirmá cada alerta."},cmd:"python3 scripts/lint_questions.py questions.txt --lang es"},
+{n:"lint_tasks.py",sk:"ux-usability-testing",d:{en:"Finds clues in usability tasks: product labels, click verbs, “easy/simply”, step-by-step.",es:"Encuentra pistas en tareas de usabilidad: etiquetas del producto, verbos de clic, «fácil/simplemente», paso a paso."},cmd:"python3 scripts/lint_tasks.py tasks.txt --labels labels.txt"},
+{n:"problems_matrix.py",sk:"ux-usability-testing",d:{en:"Problems × participants with frequency and average severity.",es:"Problemas × participantes con frecuencia y severidad promedio."},cmd:"python3 scripts/problems_matrix.py problems.csv"},
+{n:"consolidate_findings.py",sk:"ux-heuristic-evaluation",d:{en:"Merges the CSVs of several evaluators (file name = evaluator) and flags agreement.",es:"Une los CSV de varios evaluadores (nombre de archivo = evaluador) y marca los acuerdos."},cmd:"python3 scripts/consolidate_findings.py ana.csv ben.csv --output summary.md"},
+{n:"analyze_notes.py",sk:"ux-synthesis",d:{en:"Themes with distinct participants and a priority table from tagged notes.",es:"Temas con participantes distintos y tabla de prioridades desde notas etiquetadas."},cmd:"python3 scripts/analyze_notes.py notes.csv --total-participants 8"},
+{n:"verify_quotes.py",sk:"ux-insight-qa",d:{en:"Looks for each quote of a report inside the transcripts: verified, approximate or not found.",es:"Busca cada cita de un informe dentro de las transcripciones: verificada, aproximada o no encontrada."},cmd:"python3 scripts/verify_quotes.py --report report.md --transcripts transcripts/"},
+{n:"moderator_scorecard.py",sk:"ux-transcript-prep",d:{en:"Self-review of your moderation: talk share, longest turns, interruptions, leading questions. Not for performance reviews.",es:"Autoevaluación de tu moderación: tiempo de habla, turnos largos, interrupciones, preguntas capciosas. No sirve para evaluar desempeño."},cmd:"python3 scripts/moderator_scorecard.py session.txt --moderator Moderator"},
+{n:"decision_log.py",sk:"ux-research-impact",d:{en:"Summarizes the decision log: status counts, implementation rate, oldest pending, warnings.",es:"Resume el registro de decisiones: conteos por estado, tasa de implementación, pendientes más antiguas, avisos."},cmd:"python3 scripts/decision_log.py log.csv --today 2026-10-01"},
+{n:"lint_artifact.py",sk:"ux-personas-and-maps",d:{en:"Checks that a persona, empathy map or journey declares status, evidence and date. --pairs counts comparisons.",es:"Verifica que una persona, mapa de empatía o journey declare estado, evidencia y fecha. --pairs cuenta comparaciones."},cmd:"python3 scripts/lint_artifact.py --pairs 15"},
+{n:"validate_profile.py",sk:"ux-research-onboarding",d:{en:"Checks research-profile.md and warns about e-mails, phones or keys that must not be there.",es:"Verifica research-profile.md y avisa si hay emails, teléfonos o claves que no deberían estar."},cmd:"python3 scripts/validate_profile.py research-profile.md"}
+];
+var RECIPES=[
+ [{en:"New product, validate the idea",es:"Producto nuevo, validar la idea"},[{en:"ux-research-onboarding → ux-research-plan",es:"ux-research-onboarding → ux-research-plan"},{en:"ux-method-selector: discovery interviews + competitors",es:"ux-method-selector: entrevistas de descubrimiento + competencia"},{en:"ux-participants-recruiting: screener and consent",es:"ux-participants-recruiting: screener y consentimiento"},{en:"ux-interview-guide, then ux-transcript-prep",es:"ux-interview-guide, luego ux-transcript-prep"},{en:"ux-synthesis → ux-personas-and-maps",es:"ux-synthesis → ux-personas-and-maps"}]],
+ [{en:"Existing product, conversion is dropping",es:"Producto existente, baja la conversión"},[{en:"ux-heuristic-evaluation of the flow",es:"ux-heuristic-evaluation del flujo"},{en:"ux-method-selector: analytics + usability tests",es:"ux-method-selector: analítica + pruebas de usabilidad"},{en:"ux-usability-testing with 5 users",es:"ux-usability-testing con 5 usuarios"},{en:"ux-survey-builder: SUS as a baseline",es:"ux-survey-builder: SUS como línea base"},{en:"ux-synthesis → ux-research-report",es:"ux-synthesis → ux-research-report"}]],
+ [{en:"Little time, little budget",es:"Poco tiempo y poco presupuesto"},[{en:"ux-research-plan: ask for the minimum viable version",es:"ux-research-plan: pedí la versión mínima viable"},{en:"ux-heuristic-evaluation with 3–5 evaluators",es:"ux-heuristic-evaluation con 3–5 evaluadores"},{en:"5 remote usability sessions",es:"5 sesiones de usabilidad remotas"},{en:"ux-research-ops: short debrief after each session",es:"ux-research-ops: debrief corto después de cada sesión"}]],
+ [{en:"Reorganize menu or navigation",es:"Reorganizar menú o navegación"},[{en:"ux-card-sorting-tree-testing: open card sort",es:"ux-card-sorting-tree-testing: card sorting abierto"},{en:"Analyze with cardsort_matrix.py",es:"Analizá con cardsort_matrix.py"},{en:"Tree test to validate the new structure",es:"Tree test para validar la nueva estructura"},{en:"ux-research-report: proposed tree",es:"ux-research-report: árbol propuesto"}]],
+ [{en:"Before going to the field",es:"Antes de salir al campo"},[{en:"ux-ethics-bias-review on plan, guide and consent",es:"ux-ethics-bias-review sobre plan, guía y consentimiento"},{en:"lint_questions.py on your questions",es:"lint_questions.py sobre tus preguntas"},{en:"ux-participants-recruiting: accessibility and data",es:"ux-participants-recruiting: accesibilidad y datos"}]],
+ [{en:"I have recorded interviews",es:"Tengo entrevistas grabadas"},[{en:"ux-transcript-prep: clean and pseudonymize",es:"ux-transcript-prep: limpiar y seudonimizar"},{en:"ux-synthesis: codes, themes with n of N, quotes",es:"ux-synthesis: códigos, temas con n de N, citas"},{en:"ux-insight-qa: check insights and quotes",es:"ux-insight-qa: revisar insights y citas"},{en:"ux-research-report → ux-research-impact",es:"ux-research-report → ux-research-impact"}]]
+];
+var NUMBERS=[
+ [{en:"Usability tests (qualitative)",es:"Pruebas de usabilidad (cualitativo)"},{en:"5 per round and per segment",es:"5 por ronda y por segmento"},{en:"3–4 per group if segments overlap",es:"3–4 por grupo si los segmentos se solapan"}],
+ [{en:"Interviews",es:"Entrevistas"},{en:"5–10 per segment",es:"5–10 por segmento"},{en:"The “5” from NN/g was meant for usability testing",es:"El «5» de NN/g nació para usabilidad"}],
+ [{en:"Quantitative studies",es:"Estudios cuantitativos"},{en:"About 40 (NN/g 2021); 30 at 90% confidence",es:"Unos 40 (NN/g 2021); 30 con 90 % de confianza"},{en:"Older sources said 20",es:"Fuentes anteriores decían 20"}],
+ [{en:"Card sorting",es:"Card sorting"},{en:"15+ per user group",es:"15+ por grupo de usuarios"},{en:"Cards: 30–50 depending on the source",es:"Tarjetas: 30–50 según la fuente"}],
+ [{en:"Heuristic evaluation",es:"Evaluación heurística"},{en:"3–5 independent evaluators",es:"3–5 evaluadores independientes"},{en:"1–2 hours each, narrow scope",es:"1–2 h cada uno, alcance acotado"}],
+ [{en:"SUS",es:"SUS"},{en:"Average 68",es:"Promedio 68"},{en:"Two interpretation scales: cite which one",es:"Dos escalas de interpretación: citá cuál usás"}],
+ [{en:"Survey",es:"Encuesta"},{en:"Under 10 min, 10–15 questions",es:"Menos de 10 min, 10–15 preguntas"},{en:"Drop-off rises after 7–8 min",es:"El abandono sube desde los 7–8 min"}],
+ [{en:"Recruiting",es:"Reclutamiento"},{en:"Add 20–30 % for no-shows",es:"Sumá 20–30 % por ausencias"},{en:"sample_size.py does it for you",es:"sample_size.py lo calcula por vos"}]
+];
+var RULES=[
+ [{en:"Decision before method",es:"Decisión antes que método"},{en:"If you don't know what you will decide with the results, there is no study yet.",es:"Si no sabés qué vas a decidir con los resultados, todavía no hay estudio."}],
+ [{en:"What people say is not what they do",es:"Lo que dicen no es lo que hacen"},{en:"Combine attitudinal and behavioral data: survey + analytics, interview + usability test.",es:"Combiná actitudinal y conductual: encuesta + analítica, entrevista + prueba de usabilidad."}],
+ [{en:"One question at a time",es:"Una pregunta a la vez"},{en:"Open, about concrete moments, no loaded words, no hypotheticals about the future.",es:"Abiertas, sobre momentos concretos, sin palabras cargadas ni hipótesis de futuro."}],
+ [{en:"Small samples, small claims",es:"Muestras chicas, afirmaciones chicas"},{en:"With 8 people say “5 of 8”, not “62%”.",es:"Con 8 personas decí «5 de 8», no «62 %»."}],
+ [{en:"Ethics by design",es:"Ética desde el diseño"},{en:"Consent, privacy and bias are reviewed before fieldwork, not after.",es:"Consentimiento, privacidad y sesgos se revisan antes del campo, no al final."}],
+ [{en:"AI assists, it doesn't replace",es:"La IA ayuda, no reemplaza"},{en:"Verify quotes and figures against the source. Don't paste identifiable data without consent.",es:"Verificá citas y cifras contra la fuente. No pegues datos identificables sin consentimiento."}]
+];
+var TROUBLE=[
+ [{en:"A skill does not trigger",es:"Un skill no se activa"},{en:"Name it in the request (“use ux-interview-guide”) or add context: product, decision, stage.",es:"Nombralo en el pedido («usá ux-interview-guide») o sumá contexto: producto, decisión, etapa."}],
+ [{en:"The answer is generic",es:"La respuesta es genérica"},{en:"Run the onboarding interview, paste real data and state the decision you must make.",es:"Hacé la entrevista de onboarding, pegá datos reales y decí la decisión que tenés que tomar."}],
+ [{en:"A script reports missing columns",es:"Un script avisa que faltan columnas"},{en:"Check the CSV header. English and Spanish column names both work; each skill documents them.",es:"Revisá el encabezado del CSV. Funcionan nombres de columnas en inglés y en español; cada skill los documenta."}],
+ [{en:"Data is sensitive",es:"Los datos son sensibles"},{en:"Use ux-transcript-prep first (P01, P02…) and ux-ethics-bias-review before analyzing.",es:"Usá primero ux-transcript-prep (P01, P02…) y ux-ethics-bias-review antes de analizar."}],
+ [{en:"You doubt a number",es:"Dudás de una cifra"},{en:"Open the skill's references/sources.md: it shows where it comes from and how reliable it is.",es:"Abrí el references/sources.md del skill: muestra de dónde sale y cuán confiable es."}]
+];
+
+var OUTPUTS={"sus_score.py": {"en": "participant (row 2): 85.0\nparticipant (row 3): 50.0  [REVIEW: identical answers on all 10 items (all 3): SUS mixes positive and negative items, so this is contradictory]\nparticipant (row 4): 47.5  [REVIEW: 9 of 10 answers are identical (5): possible straight-lining; strong contradictions in item pairs 3-8, 2-3, 7-10, 4-7, 3-4]\nparticipant (row 5): 30.0  [REVIEW: strong contradictions in item pairs 3-8, 2-3, 3-4]\nparticipant (row 6): 87.5\n------------------------------------\nn = 5\nmean = 60.0 (grade D; marginal); reference average = 68\nmedian = 50.0\nmin-max = 30.0 - 87.5\nstandard deviation = 25.2\nNote: 'REVIEW' flags use our own heuristics (not a published standard). Decide case by case and report the score with and without those rows.\nWarning: with few participants the margin of error is wide; indicative only (the n threshold is a practical rule of ours, not from the sources).", "es": "participante (fila 2): 85.0\nparticipante (fila 3): 50.0  [REVISAR: respuestas idénticas en los 10 ítems (todo 3): el SUS mezcla ítems positivos y negativos, así que es contradictorio]\nparticipante (fila 4): 47.5  [REVISAR: 9 de 10 respuestas son idénticas (5): posible respuesta automática; contradicciones fuertes en los pares de ítems 3-8, 2-3, 7-10, 4-7, 3-4]\nparticipante (fila 5): 30.0  [REVISAR: contradicciones fuertes en los pares de ítems 3-8, 2-3, 3-4]\nparticipante (fila 6): 87.5\n------------------------------------\nn = 5\nmedia = 60.0 (grado D; marginal); referencia promedio = 68\nmediana = 50.0\nmín-máx = 30.0 - 87.5\ndesvío estándar = 25.2\nNota: 'REVISAR' usa heurísticas nuestras (no un estándar publicado). Decidí caso por caso y reportá el puntaje con y sin esas filas.\nAviso: con pocos participantes el margen de error es amplio; resultado orientativo (el umbral de n es un criterio práctico nuestro, no de las fuentes)."}, "cardsort_matrix.py": {"en": "Participants: 3 · Cards: 5\n\nStrongest pairs (% of participants who grouped them together):\n    100%  Change password  <->  Update payment method\n     67%  Order history  <->  Track a delivery\n     33%  Change password  <->  Order history\n     33%  Order history  <->  Update payment method\n\nSuggested grouping (average similarity >= 60%):\n  Group 1 (2 cards): Change password; Update payment method\n  Group 2 (2 cards): Order history; Track a delivery\n  Group 3 (orphan): Contact support\n\nCard x category agreement (top 3 per card; ! = leading category < 50%):\n    Change password: account 67%, my account 33%\n    Contact support: help 67%, support 33%\n…", "es": "Participantes: 2 · Tarjetas: 4\n\nPares más fuertes (% de participantes que los agruparon):\n    100%  Actualizar medio de pago  <->  Cambiar contraseña\n     50%  Historial de pedidos  <->  Seguir un envío\n     50%  Actualizar medio de pago  <->  Historial de pedidos\n     50%  Cambiar contraseña  <->  Historial de pedidos\n\nAgrupación sugerida (similitud promedio >= 60%):\n  Grupo 1 (2 tarjetas): Actualizar medio de pago; Cambiar contraseña\n  Grupo 2 (huérfana): Historial de pedidos\n  Grupo 3 (huérfana): Seguir un envío\n\nAcuerdo tarjeta x categoría (top 3 por tarjeta; ! = categoría líder < 50 %):\n    Actualizar medio de pago: cuenta 50%, mi cuenta 50%\n    Cambiar contraseña: cuenta 50%, mi cuenta 50%\n…"}, "tree_test_summary.py": {"en": "Task                                       n Success   Direct   Median s  95% CI success  Reading\nChange the payment method of your subscr   4     75%      50%         28      30- 95%      acceptable\nFind out when your parcel will arrive      4     50%      25%         37      15- 85%      review\n\nWarning: with fewer than ~15-30 participants the percentages are indicative; use the confidence interval (3 of 4 successes is '75%' but the CI runs from ~30 to ~95%).", "es": "Tarea                                      n   Éxito  Directo  Mediana s    IC 95% éxito  Lectura\nCambiar el medio de pago de tu suscripci   3     67%      33%         35      21- 94%      revisar\n\nAviso: con menos de ~15-30 participantes los porcentajes son orientativos; mirá el intervalo de confianza (3 de 4 éxitos es '75 %' pero el IC va de ~30 a ~95 %)."}, "sample_size.py": {"en": "Method: usability\nBase: 5 per segment x 2 segment(s) (if segments overlap, 3-4 per segment: minimum 6)\nEffective sessions: 10\nTo recruit (+25% no-shows/discards): 13\nReminder: these are references, not laws. Run a separate pilot (1-2 people).", "es": "Método: usability\nBase: 5 por segmento x 2 segmento(s) (si los segmentos se solapan, 3-4 por segmento: mínimo 6)\nSesiones efectivas: 10\nA reclutar (+25% ausencias/descartes): 13\nRecordatorio: son referencias, no leyes. Piloto aparte (1-2 personas)."}, "lint_questions.py": {"en": "[3] Tell me about the last time you booked a trip online. What happened, step by step?\n    OK (no automatic alerts)\n[4] Do you like our booking app?\n    closed (yes/no): rewrite as 'tell me about the last time...' or 'what / how...'\n[5] What's so beautiful about this new interface?\n    leading or value-loaded wording: use neutral language and offer both poles\n[6] How do you usually plan a trip?\n    generic or absolute word ('usually', 'always', 'everyone'): anchor in the last time it happened\n[7] Would you use a feature that compares prices automatically?\n    closed (yes/no): rewrite as 'tell me about the last time...' or 'what / how...'; hypothetical or prediction: ask about the most recent real episode instead; jargon: use the participant's own words\n[8] What do you think of the usability and the design of the checkout?\n    possible double-barreled question: split into two questions; jargon: use the participant's own words\n[9] Would you pay $9.99 a month for this?\n    closed (yes/no): rewrite as 'tell me about the last time...' or 'what / how...'; hypothetical or prediction: ask about the most recent real episode instead; price anchoring: do not reveal a number first; ask open or about past spending\n[10] How did the onboarding feel to you?\n    jargon: use the participant's own words\n…", "es": "[3] Contame la última vez que reservaste un viaje por internet. ¿Qué pasó, paso a paso?\n    OK (sin alertas automaticas)\n[4] ¿Te gusta nuestra app de reservas?\n    cerrada (si/no): reescribila como 'contame la ultima vez que...' o 'que / como...'\n[5] ¿Qué tiene de hermosa esta interfaz?\n    capciosa o con carga de valor: usa lenguaje neutro y ofrece ambos polos\n[6] ¿Cómo planificás normalmente un viaje?\n    generica o absoluta ('normalmente', 'siempre', 'todos'): ancla en la ultima vez que paso\n[7] ¿Usarías una función que compare precios automáticamente?\n    hipotetica o prediccion: pregunta por el episodio real mas reciente\n[8] ¿Qué opinás de la usabilidad y el diseño del checkout?\n    posible doble pregunta: partila en dos; jerga: usa las palabras del participante\n[9] ¿Pagarías $9,99 por mes por esto?\n    hipotetica o prediccion: pregunta por el episodio real mas reciente; anclaje de precio: no reveles una cifra primero; pregunta abierto o por gasto pasado\n[10] ¿Cómo fue tu experiencia con el onboarding?\n    jerga: usa las palabras del participante\n…"}, "lint_tasks.py": {"en": "Task 1: OK\nTask 2: Click on \"Reports\" and then simply look for the monthly spend.\n  - uses the product label 'Reports' (gives the answer away)\n  - [soft] 'reports' shares a stem with the product label 'Reportes': reword it or justify it\n  - prejudging word: 'simply'\n  - click/tap verb aimed at the interface: ask for the result, not the gesture\n  - looks like a step-by-step instruction or navigation path\n  - no clear end point (how does the person know they are done?)\nTask 3: OK\nTask 4: First go to Settings > Profile and change your password.\n  - uses the product label 'Settings' (gives the answer away)\n  - uses the product label 'Profile' (gives the answer away)\n  - looks like a step-by-step instruction or navigation path\n  - no clear end point (how does the person know they are done?)\nTask 5: Change your phone number\n  - no clear end point (how does the person know they are done?)\n…", "es": "Tarea 1: OK\nTarea 2: Hacé clic en «Reportes» y buscá simplemente el gasto del mes.\n  - palabra que prejuzga: «simplemente»\n  - verbo de clic/acción sobre la interfaz: pedí el resultado, no el gesto\n  - sin punto de término claro (¿cómo sabe la persona que terminó?)\nTarea 3: OK\nTarea 4: Primero andá a Ajustes > Perfil y cambiá tu contraseña.\n  - parece instrucción paso a paso o ruta de navegación\n  - sin punto de término claro (¿cómo sabe la persona que terminó?)\nTarea 5: Cambiá tu teléfono\n  - sin punto de término claro (¿cómo sabe la persona que terminó?)\n  - muy corta: falta motivo/contexto del escenario\n\n3 de 5 tareas con alertas. Heurístico: confirmá cada alerta a ojo."}, "problems_matrix.py": {"en": "Participants: 5. Suggested order = average severity x frequency (the team makes the final call).\n\nProblem                                              Freq.  Avg. sev.\nCannot find the date filter                         3 of 5        2.7\nCheckout button looks disabled                      1 of 5        4.0\nConfirmation message is unclear                     2 of 5        1.5\n\nNote: small n, use counts, not percentages.", "es": "Participantes: 3. Orden sugerido = severidad promedio × frecuencia (decisión final del equipo).\n\nProblema                                             Frec. Sev. prom.\nNo encuentra el filtro de fechas                    2 de 3        3.0\nMensaje de confirmación poco claro                  1 de 3        2.0\n\nNota: n chico, usá los conteos, no porcentajes."}, "consolidate_findings.py": {"en": "# Consolidated findings (2 evaluators, 4 unique problems)\n\n| # | Where | Heuristic | Avg. sev. | Sev. range | Agreement | Problem (first report) | Recommendation |\n|---|---|---|---|---|---|---|---|\n| 1 | checkout step 3 | 9 Error recovery | 3.5 | 3-4 | 2/2 | Error shown only in red at the top of the form | Show the message next to the field with text and an icon |\n| 2 | checkout step 2 | 1 Visibility of system status | 2.0 | 1-3 | 2/2 | No progress indicator; users cannot tell how many steps remain | Add a 'Step 2 of 4' indicator |\n| 3 | home | 8 Aesthetic and minimalist design | 2.0 | 2-2 | 1/2 (only 1: discuss) | Banner text overlaps the photo and is hard to read | Use a solid or semi-transparent background behind the text |\n| 4 | settings | 6 Recognition over recall | 2.0 | 2-2 | 1/2 (only 1: discuss) | Icon without text label | Add a visible label |\n\n## Problems per heuristic\n\n- 1 Visibility of system status: 1\n- 2 Match with the real world: 0\n- 3 User control and freedom: 0\n- 4 Consistency and standards: 0\n- 5 Error prevention: 0\n…", "es": "# Hallazgos consolidados (2 evaluadores, 5 problemas únicos)\n\n| # | Dónde | Heurística | Sev. prom. | Rango sev. | Acuerdo | Problema (primer reporte) | Recomendación |\n|---|---|---|---|---|---|---|---|\n| 1 | checkout paso 3 | 9 Recuperación de errores | 4.0 | 4-4 | 1/2 (solo 1: discutir) | El error solo se ve en rojo arriba del formulario | Mostrar el mensaje junto al campo |\n| 2 | checkout step 3 | 9 Recuperación de errores | 4.0 | 4-4 | 1/2 (solo 1: discutir) | Error shown only in red at the top of the form | Show the message next to the field with text and an icon |\n| 3 | checkout step 2 | 1 Visibilidad del estado | 3.0 | 3-3 | 1/2 (solo 1: discutir) | No progress indicator; users cannot tell how many steps remain | Add a 'Step 2 of 4' indicator |\n| 4 | ajustes | 6 Reconocimiento > recuerdo | 2.0 | 2-2 | 1/2 (solo 1: discutir) | Ícono sin etiqueta de texto | Agregar etiqueta visible |\n| 5 | home | 8 Estética y minimalismo | 2.0 | 2-2 | 1/2 (solo 1: discutir) | Banner text overlaps the photo and is hard to read | Use a solid or semi-transparent background behind the text |\n\n## Problemas por heurística\n\n- 1 Visibilidad del estado: 1\n- 2 Sistema y mundo real: 0\n- 3 Control y libertad: 0\n- 4 Consistencia y estándares: 0\n…"}, "analyze_notes.py": {"en": "# Coding summary (8 notes, 8 participants)\n\n## Themes by distinct participants\n\n| Tag | Participants (n of N) | Mentions | Type | Quote (check) |\n|---|---|---|---|---|\n| hidden-cost | 3/8 | 3 | attitude/behavior | \"I didn't know the shipping cost until the last step\" (P1) |\n| payment | 3/8 | 3 | attitude/behavior | \"Paid with someone else's card because there is no bank transfer option\" (P4) |\n| navigation | 2/8 | 2 | behavior | \"Takes a long time to find where to change their plan\" (P4) |\n| abandonment | 1/8 | 1 | behavior | \"Abandoned the cart on seeing the final total\" (P2) |\n| filters | 1/8 | 1 | behavior | \"Looked for the size filter and could not find it\" (P2) |\n| payment-methods | 1/8 | 1 | behavior | \"Paid with someone else's card because there is no bank transfer option\" (P4) |\n| range-positive | 1/8 | 1 | attitude | \"I love the variety of products\" (P1) |\n| trust | 1/8 | 1 | attitude | \"I don't trust saving my card\" (P3) |\n\n## Priority table (heuristic: frequency x severity / effort)\n…", "es": "# Resumen de codificacion (8 notas, 8 participantes)\n\n## Temas por participantes distintos\n\n| Tag | Participantes (n de N) | Menciones | Tipo | Cita (revisar) |\n|---|---|---|---|---|\n| costo-oculto | 3/8 | 3 | actitud/conducta | \"No supe cuanto costaba el envio hasta el ultimo paso\" (P1) |\n| pago | 3/8 | 3 | actitud/conducta | \"Pago con tarjeta de otra persona porque no ve opcion de transferencia\" (P4) |\n| navegacion | 2/8 | 2 | conducta | \"Busco el filtro de talle y no lo encuentra\" (P2) |\n| abandono | 1/8 | 1 | conducta | \"Abandono el carrito al ver el total final\" (P2) |\n| confianza | 1/8 | 1 | actitud | \"No confio en guardar la tarjeta\" (P3) |\n| filtros | 1/8 | 1 | conducta | \"Busco el filtro de talle y no lo encuentra\" (P2) |\n| medios-de-pago | 1/8 | 1 | conducta | \"Pago con tarjeta de otra persona porque no ve opcion de transferencia\" (P4) |\n| oferta-positivo | 1/8 | 1 | actitud | \"Me encanta la variedad de productos\" (P1) |\n\n## Tabla de prioridades (heuristica: frecuencia x severidad / esfuerzo)\n…"}, "verify_quotes.py": {"en": "Report: skills/ux-insight-qa/assets/sample-report.md | transcripts: 2 file(s) | minimum 6 words | approximate threshold 0.85\n\n[1] (report, line 5) «I didn't understand how much shipping would cost until the last step, and that really a...»\n    VERIFIED in p1.txt, line 2 (matches after normalizing accents, punctuation and fillers)\n\n[2] (report, line 6) «What stopped me was being asked to create an account before seeing the total cost, no w...»\n    VERIFIED in p2.txt, line 2 (matches after normalizing accents, punctuation and fillers)\n\n[3] (report, line 7) «What stopped me was being forced to create an account before seeing the cost, I never d...»\n    APPROXIMATE in p2.txt, line 2 (similarity 0.86)\n    Transcript says (normalized): what stopped me was being asked to create an account before seeing the total\n    Check whether the difference is light cleanup or a change of meaning.\n\n[4] (report, line 8) «The chat support solved everything in two minutes and I was happy with the shop»\n    NOT FOUND. Nothing similar in the given transcripts.\n    Possible causes: that transcript is missing, it is a translation or paraphrase, it comes from notes (not the recording) or it was altered. The person decides.\n…", "es": "Report: skills/ux-insight-qa/assets/sample-report.es.md | transcripts: 2 file(s) | minimum 6 words | approximate threshold 0.85\n\n[1] (report, line 5) «No entendí cuánto iba a pagar de envío hasta el último paso, y ahí me enojé bastante»\n    VERIFIED in p1.txt, line 2 (matches after normalizing accents, punctuation and fillers)\n\n[2] (report, line 6) «Me frenó que me pidieran crear una cuenta antes de ver el costo total, ni loca lo hago»\n    VERIFIED in p2.txt, line 2 (matches after normalizing accents, punctuation and fillers)\n\n[3] (report, line 7) «Me frenó que me obligaran a crear una cuenta antes de ver el costo, no lo hago nunca»\n    NOT FOUND. Closest: p2.txt, line 2 (similarity 0.82)\n    Transcript says (normalized): me freno que me pidieran crear una cuenta antes de ver el costo total ni loca\n    Possible causes: that transcript is missing, it is a translation or paraphrase, it comes from notes (not the recording) or it was altered. The person decides.\n\n[4] (report, line 8) «El soporte por chat me resolvió todo en dos minutos y quedé feliz con la tienda»\n    NOT FOUND. Nothing similar in the given transcripts.\n    Possible causes: that transcript is missing, it is a translation or paraphrase, it comes from notes (not the recording) or it was altered. The person decides.\n…"}, "moderator_scorecard.py": {"en": "# Moderator scorecard (heuristic)\n\nFile: skills/ux-transcript-prep/assets/sample-transcript.txt | Session type: interview\nIntended use: self-assessment or coaching you asked for. It is NOT a performance evaluation.\nAlerts rely on text patterns: they can give false positives and negatives. Listen to the session.\n\n## Speech per speaker\n| Speaker | Words | % words | Turns | % turns | Words per turn |\n|---|---|---|---|---|---|\n| Moderator (moderator) | 59 | 41% | 4 | 50% | 15 |\n| Maria Lopez | 86 | 59% | 4 | 50% | 22 |\n\nReading: the moderator produces 41% of the words. As a practice reference (our heuristic, not a norm), in an interview the participant should talk well over half of the time; above ~35% check whether you explained too much or filled silences.\nIf speaker labels are wrongly assigned (common in automatic transcripts), these percentages invert or distort: check a sample against the audio.\n\n## Longest moderator turns (>= 60 words)\n…", "es": "# Scorecard del moderador (heuristico)\n\nArchivo: skills/ux-transcript-prep/assets/sample-transcript.es.txt | Tipo de sesion: entrevista\nUso previsto: autoevaluacion o coaching que vos pediste. NO es una evaluacion de desempeno.\nLas alertas se basan en patrones de texto: pueden dar falsos positivos y negativos. Escucha la sesion.\n\n## Habla por hablante\n| Hablante | Palabras | % palabras | Turnos | % turnos | Palabras por turno |\n|---|---|---|---|---|---|\n| Moderadora (moderador) | 47 | 36% | 4 | 50% | 12 |\n| María López | 82 | 64% | 4 | 50% | 20 |\n\nLectura: el moderador produce 36% de las palabras. Como referencia de practica (heuristica nuestra, no norma), en una entrevista conviene que el participante hable bastante mas que vos; si pasas del ~35%, revisa si explicaste de mas o llenaste silencios.\nSi las etiquetas de hablante estan mal asignadas (comun en transcripciones automaticas), estos porcentajes se invierten o distorsionan: verifica una muestra contra el audio.\n\n## Turnos mas largos del moderador (>= 60 palabras)\n…"}, "decision_log.py": {"en": "# Decision log summary\n\nCutoff date: 2026-10-01. Recommendations logged: 6.\n\n## Status of the recommendations\n\n| Status | Count | % |\n|---|---|---|\n| accepted | 1 | 17% |\n| backlog | 1 | 17% |\n| implemented | 1 | 17% |\n| rejected | 1 | 17% |\n| pending | 2 | 33% |\n\n**Implementation rate:** 1 of 6 (17%) implemented.\nOf those with a decision (4): 25%.\n…", "es": "# Resumen del registro de decisiones\n\nFecha de corte: 2026-10-01. Recomendaciones registradas: 6.\n\n## Estado de las recomendaciones\n\n| Estado | Cantidad | % |\n|---|---|---|\n| aceptada | 1 | 17% |\n| en backlog | 1 | 17% |\n| implementada | 1 | 17% |\n| rechazada | 1 | 17% |\n| pendiente | 2 | 33% |\n\n**Tasa de implementacion:** 1 de 6 (17%) implementadas.\nSobre las que ya tienen decision (4): 25%.\n…"}, "lint_artifact.py": {"en": "15 concepts -> 105 pairwise comparisons\nWarning: risk of participant fatigue; consider card sorting or fewer concepts.", "es": "15 conceptos -> 105 comparaciones por pares\nAviso: riesgo de fatiga del participante; considera card sorting o reducir conceptos."}, "validate_profile.py": {"en": "Profile is valid (0 warning(s)).", "es": "El perfil es válido (0 aviso(s))."}};
+
+var LANG="en";
+try{var saved=localStorage.getItem("uxr-lang"); if(saved==="es"||saved==="en") LANG=saved; else if((navigator.language||"").toLowerCase().indexOf("es")===0) LANG="es";}catch(e){}
+function T(o){return (o&&typeof o==="object"&&!Array.isArray(o))?(o[LANG]||o.en):o;}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+var active="all";
+function copyText(t,btn){
+  function ok(){var o=btn.textContent;btn.classList.add("done");btn.textContent=T(UI.copied);setTimeout(function(){btn.classList.remove("done");btn.textContent=o},1400)}
+  function fb(){var el=btn.parentNode.querySelector("pre,q");if(!el)return;var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent=T(UI.select);}
+  try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}
+}
+document.addEventListener("click",function(e){
+  var b=e.target.closest&&e.target.closest(".copy");
+  if(b){var src=b.parentNode.querySelector("pre,q");copyText(src?src.textContent:"",b);return}
+  var c=e.target.closest&&e.target.closest("#chips button");
+  if(c){active=c.getAttribute("data-s");renderChips();renderSkills();return}
+  var l=e.target.closest&&e.target.closest("#langbtn");
+  if(l){LANG=LANG==="en"?"es":"en";try{localStorage.setItem("uxr-lang",LANG)}catch(x){} render();}
+});
+function renderChips(){
+  var chips=[["all",UI.all]].concat(STAGES.map(function(s){return [s.id,s.label]}));
+  document.getElementById("chips").innerHTML=chips.map(function(c){return '<button type="button" class="chip" aria-pressed="'+(c[0]===active)+'" data-s="'+c[0]+'">'+esc(T(c[1]))+'</button>'}).join(" ");
+}
+function stageLabel(id){var s=STAGES.filter(function(x){return x.id===id})[0];return s?T(s.label):id}
+function renderSkills(){
+  var term=document.getElementById("q").value.trim().toLowerCase(), grid=document.getElementById("grid");
+  var list=SKILLS.filter(function(s){
+    if(active!=="all"&&s.st!==active)return false;
+    return !term||(s.n+" "+T(s.when)+" "+T(s.say)+" "+T(s.gives)).toLowerCase().indexOf(term)>-1});
+  if(!list.length){grid.innerHTML='<p class="empty">'+esc(T(UI.none))+'</p>';return}
+  grid.innerHTML=list.map(function(s){return '<article class="skill" id="s-'+s.n+'">'+
+    '<header><span class="name">'+s.n+'</span><span class="tag">'+esc(stageLabel(s.st))+'</span></header>'+
+    '<dl><div><dt>'+esc(T(UI.when))+'</dt><dd>'+esc(T(s.when))+'</dd></div>'+
+    '<div><dt>'+esc(T(UI.ask))+'</dt><dd><div class="say"><q>'+esc(T(s.say))+'</q><button type="button" class="copy">'+esc(T(UI.copy))+'</button></div></dd></div>'+
+    '<div><dt>'+esc(T(UI.gives))+'</dt><dd>'+esc(T(s.gives))+'</dd></div></dl>'+
+    '<details><summary>'+esc(T(UI.example))+'</summary><pre>'+esc(T(s.out))+'</pre></details></article>'}).join("");
+}
+function table(id,head,rows){
+  document.getElementById(id).innerHTML='<thead><tr>'+head.map(function(h){return '<th>'+esc(T(h))+'</th>'}).join("")+'</tr></thead><tbody>'+
+    rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+esc(T(c))+'</td>'}).join("")+'</tr>'}).join("")+'</tbody>';
+}
+function render(){
+  document.documentElement.lang=LANG;
+  document.querySelectorAll("[data-i]").forEach(function(el){var k=el.getAttribute("data-i");if(UI[k]!==undefined)el.textContent=T(UI[k])});
+  document.getElementById("q").placeholder=T(UI.search);
+  document.getElementById("nav").innerHTML=UI.nav.map(function(n){return '<a href="#'+n[0]+'">'+esc(T(n[1]))+'</a>'}).join("")+'<span class="sp"></span><button id="langbtn" class="lang" type="button" aria-label="Language">'+(LANG==="en"?"Español":"English")+'</button>';
+  document.getElementById("steps").innerHTML=UI.steps.map(function(s){return '<div class="step"><b>'+esc(T(s[0]))+'</b><p>'+esc(T(s[1]))+'</p></div>'}).join("");
+  document.getElementById("flow").innerHTML=STAGES.filter(function(s){return s.skills.length}).map(function(s,i){return '<div class="stage"><div class="k">'+(i+1)+'</div><h3>'+esc(T(s.label))+'</h3><ul>'+s.skills.map(function(n){return '<li><a href="#s-'+n+'" data-go="'+n+'">'+n+'</a></li>'}).join("")+'</ul></div>'}).join("");
+  document.getElementById("cross").innerHTML='<b>'+esc(T(UI.always))+'</b> '+CROSS.map(function(n){return '<a href="#s-'+n+'" data-go="'+n+'">'+n+'</a>'}).join("");
+  renderChips(); renderSkills();
+  document.getElementById("scripts-list").innerHTML=SCRIPTS.map(function(s){return '<div class="script"><h3><code>'+s.n+'</code></h3><p>'+esc(T(s.d))+' <span class="tag">'+esc(s.sk)+'</span></p>'+
+    '<div class="cmd"><pre>'+esc(s.cmd)+'</pre><button type="button" class="copy">'+esc(T(UI.copy))+'</button></div>'+
+    (OUTPUTS[s.n]?'<details><summary>'+esc(T(UI.realout))+'</summary><pre>'+esc(OUTPUTS[s.n][LANG]||OUTPUTS[s.n].en||"")+'</pre></details>':"")+'</div>'}).join("");
+  table("rep-table",UI.rep_head,UI.rep_rows);
+  document.getElementById("recipes-list").innerHTML=RECIPES.map(function(r){return '<div class="recipe"><h3>'+esc(T(r[0]))+'</h3><ol>'+r[1].map(function(x){return '<li>'+esc(T(x))+'</li>'}).join("")+'</ol></div>'}).join("");
+  table("num-table",UI.num_head,NUMBERS);
+  document.getElementById("rules-list").innerHTML=RULES.map(function(r){return '<div class="rule"><b>'+esc(T(r[0]))+'</b><p>'+esc(T(r[1]))+'</p></div>'}).join("");
+  table("trouble-table",UI.tr_head,TROUBLE);
+}
+document.getElementById("q").addEventListener("input",renderSkills);
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[data-go]");if(!a)return;active="all";document.getElementById("q").value="";renderChips();renderSkills();});
+render();
+</script>
+</body>
+</html>

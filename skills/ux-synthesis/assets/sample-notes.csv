@@ -1,0 +1,9 @@
+note,participant,tags,group,type,severity,effort
+"I didn't know the shipping cost until the last step",P1,hidden-cost;payment,Payment,attitude,3,1
+"Abandoned the cart on seeing the final total",P2,hidden-cost;abandonment,Payment,behavior,3,1
+"I don't trust saving my card",P3,trust;payment,Payment,attitude,2,2
+"Looked for the size filter and could not find it",P2,navigation;filters,Navigation,behavior,2,2
+"Takes a long time to find where to change their plan",P4,navigation,Navigation,behavior,2,3
+"I love the variety of products",P1,range-positive,Range,attitude,1,1
+"Paid with someone else's card because there is no bank transfer option",P4,payment;payment-methods,Payment,behavior,2,2
+"Said shipping seemed expensive, but bought anyway",P5,hidden-cost,Payment,attitude,1,1

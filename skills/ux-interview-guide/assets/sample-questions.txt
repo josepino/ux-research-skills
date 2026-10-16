@@ -1,0 +1,14 @@
+# Sample interview questions (English). Mix of good and problematic on purpose.
+# Lines starting with # are ignored by the linter.
+1. Tell me about the last time you booked a trip online. What happened, step by step?
+2. Do you like our booking app?
+3. What's so beautiful about this new interface?
+4. How do you usually plan a trip?
+5. Would you use a feature that compares prices automatically?
+6. What do you think of the usability and the design of the checkout?
+7. Would you pay $9.99 a month for this?
+8. How did the onboarding feel to you?
+9. Why do you like the filters?
+10. Walk me through the last time you compared two options before buying. What did you do first?
+11. Don't you think the search is confusing?
+12. What was the hardest part of that, and how did you get around it?

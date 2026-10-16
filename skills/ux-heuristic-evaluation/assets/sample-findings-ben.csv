@@ -1,0 +1,4 @@
+where,problem,heuristic,severity,recommendation
+Checkout step 3,"Generic error 'Invalid input' with no hint",9,3,"Say what is wrong and how to fix it"
+Checkout step 2,"No sense of progress",1,1,
+Settings,"Icon without text label",6,2,"Add a visible label"

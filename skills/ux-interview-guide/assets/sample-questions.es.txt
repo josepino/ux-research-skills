@@ -1,0 +1,14 @@
+# Preguntas de ejemplo (español). Mezcla de buenas y problemáticas a propósito.
+# Las líneas que empiezan con # se ignoran.
+1. Contame la última vez que reservaste un viaje por internet. ¿Qué pasó, paso a paso?
+2. ¿Te gusta nuestra app de reservas?
+3. ¿Qué tiene de hermosa esta interfaz?
+4. ¿Cómo planificás normalmente un viaje?
+5. ¿Usarías una función que compare precios automáticamente?
+6. ¿Qué opinás de la usabilidad y el diseño del checkout?
+7. ¿Pagarías $9,99 por mes por esto?
+8. ¿Cómo fue tu experiencia con el onboarding?
+9. ¿Por qué te gustan los filtros?
+10. Caminame por la última vez que comparaste dos opciones antes de comprar. ¿Qué hiciste primero?
+11. ¿No te parece que el buscador es confuso?
+12. ¿Qué fue lo más difícil de eso y cómo lo resolviste?

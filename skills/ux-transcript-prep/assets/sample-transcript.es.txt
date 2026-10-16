@@ -1,0 +1,8 @@
+[00:00:05] Moderadora: Gracias por venir, María. ¿Te parece bien que grabemos? Confirmo que la grabación empezó.
+[00:00:12] María López: Sí, dale. Eh, sí, no hay problema.
+[00:00:20] Moderadora: Contame la última vez que reservaste un viaje por internet.
+[00:00:31] María López: Eh, fue en marzo, creo que sí. Estaba planificando un finde en Mendoza con mi hermana Laura, o sea, y comparé como tres sitios, ¿vio? Mi mail es maria.lopez@example.com por si lo necesitan.
+[00:01:02] Moderadora: ¿Te resultó fácil usar el buscador? ¿No fue un poco confuso, verdad?
+[00:01:09] María López: Mmm, capaz que un poco. Dije "me llevó veinte minutos encontrar el filtro", y bueno, este, casi lo dejo—
+[00:01:20] Moderadora: [interrumpe] ¿Y qué hiciste después, cómo te sentiste y llamaste a alguien?
+[00:01:35] María López: Llamé al hotel al 11-5555-0134 y estaban en calle Mitre 482, cerca de la oficina vieja de Acme.

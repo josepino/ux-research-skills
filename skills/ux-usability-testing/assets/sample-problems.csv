@@ -1,0 +1,7 @@
+participant,problem,severity
+P1,Cannot find the date filter,3
+P2,Cannot find the date filter,3
+P4,Cannot find the date filter,2
+P1,Confirmation message is unclear,1
+P3,Confirmation message is unclear,2
+P5,Checkout button looks disabled,4

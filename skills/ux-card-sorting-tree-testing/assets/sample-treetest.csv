@@ -1,0 +1,9 @@
+participant,task,correct,direct,seconds
+P1,Change the payment method of your subscription,1,1,18
+P2,Change the payment method of your subscription,1,0,35
+P3,Change the payment method of your subscription,0,0,52
+P4,Change the payment method of your subscription,1,1,20
+P1,Find out when your parcel will arrive,1,1,12
+P2,Find out when your parcel will arrive,0,0,60
+P3,Find out when your parcel will arrive,0,0,44
+P4,Find out when your parcel will arrive,1,0,30

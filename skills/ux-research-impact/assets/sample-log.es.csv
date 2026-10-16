@@ -1,0 +1,7 @@
+fecha,hallazgo,recomendacion,decision,responsable,estado,metrica,resultado
+2026-03-10,EJEMPLO inventado: 6 de 8 participantes no encontraron el costo de envío antes de pagar,Mostrar el costo de envío en el carrito,Se agrega en el Q2,Producto (Paula),implementada,Abandono en checkout,Abandono bajó de 68% a 61% (ejemplo; sin grupo de control)
+2026-03-10,EJEMPLO inventado: el formulario de registro pide datos que nadie entiende,Reducir el formulario a 4 campos,Rechazada: legal exige 2 campos más,Legal (Marta),rechazada,Registros completados,
+2026-04-02,EJEMPLO inventado: soporte recibe muchas consultas por el cambio de plan,Rediseñar la pantalla de cambio de plan,Entra en backlog del Q4,Producto (Paula),en backlog,Tickets de soporte por cambio de plan,
+2026-05-15,EJEMPLO inventado: usuarios nuevos abandonan el onboarding en el paso 3,Quitar el paso 3 y moverlo a después del primer uso,Aceptada para el sprint 14,Diseño (Lucas),aceptada,Activación a 7 días,
+2026-06-01,EJEMPLO inventado: la búsqueda no tolera errores de tipeo,Corregir tolerancia a errores en la búsqueda,,,pendiente,,
+2026-06-20,EJEMPLO inventado: el correo de recuperación llega a spam,Revisar la configuración del correo,Pendiente de IT,IT (Raul),pendiente,Tasa de recuperación de cuentas,
