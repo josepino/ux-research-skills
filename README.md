@@ -326,7 +326,7 @@ Issues and pull requests are welcome, especially corrections to the research con
 
 ## Author and license
 
-Created by **José Pino**, UX researcher and instructor. [MIT License](LICENSE).
+Created by **José Pino**. [MIT License](LICENSE).
 The course artwork in `assets/course-card.png` is not covered by the MIT license (see the note in [LICENSE](LICENSE)).
 
 This project is independent. It is not affiliated with or endorsed by Anthropic, Udemy, Nielsen Norman Group or any tool or author it cites; names are used only to credit sources.
